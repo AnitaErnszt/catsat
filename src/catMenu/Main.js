@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import {fetchCats} from '../statee/actions';
+import {fetchCats} from '../state/actions';
 import Header from './Header.js';
 import MenuButtons from './MenuButtons.js';
 import CatCard from './CatCard.js';
