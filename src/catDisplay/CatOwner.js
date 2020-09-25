@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {BodyText} from "../globalStyles";
 
 export default function CatOwner({owner}) {
   const contactMapping = [
@@ -12,14 +13,14 @@ export default function CatOwner({owner}) {
     return (
       <View style={styles.rowStyle}>
         <View style={styles.cellStyle}>
-          <Text style={[styles.textStyle, {fontWeight: '500'}]}>
+          <BodyText style={{fontWeight: '500'}}>
             {contactInfo.name}
-          </Text>
+          </BodyText>
         </View>
         <View style={[styles.cellStyle, {flex: 2}]}>
-          <Text style={[styles.textStyle, {color: '#7B9ABF'}]}>
+          <BodyText isColour='#7B9ABF'>
             {owner[contactInfo.value]}
-          </Text>
+          </BodyText>
         </View>
       </View>
     );
@@ -27,7 +28,7 @@ export default function CatOwner({owner}) {
 
   return (
     <View style={styles.ownerContact}>
-      <Text style={styles.ownerName}>Owned by {owner.name}</Text>
+      <BodyText isSize={18} isBold style={{marginBottom: 8}}>Owned by {owner.name}</BodyText>
       {contactMapping.map((contactInfo) => (
         <ContactInfoRow key={contactInfo.name} contactInfo={contactInfo} />
       ))}
@@ -36,23 +37,10 @@ export default function CatOwner({owner}) {
 }
 
 const styles = StyleSheet.create({
-  textStyle: {
-    fontFamily: 'Avenir Next',
-    fontSize: 16,
-    lineHeight: 19,
-  },
   ownerContact: {
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 17,
-  },
-  ownerName: {
-    fontFamily: 'Avenir Next',
-    fontSize: 18,
-    fontWeight: '700',
-    lineHeight: 22,
-    color: '#143154',
-    marginBottom: 8,
   },
   rowStyle: {
     flex: 1,

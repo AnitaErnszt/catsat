@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, StatusBar, View, ScrollView} from 'react-native';
 import {fetchCats} from '../state/actions';
 import Header from './Header.js';
 import MenuButtons from './MenuButtons.js';
 import CatCard from './CatCard.js';
+import Monster from "./Monster";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { BodyText } from '../globalStyles';
 
 export default function Main({navigation}) {
   const [menu, setMenu] = useState('All cats');
@@ -21,31 +24,38 @@ export default function Main({navigation}) {
   });
 
   for (var key in s.cats) {
-    cats.push(s.cats[key]);
+    if (menu === 'All cats'){
+      cats.push(s.cats[key]);
+    }
+    if (menu === 'Liked'){
+      if (s.cats[key].liked) {
+        cats.push(s.cats[key]);
+      }
+    }
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <StatusBar hidden='true' />
       <ScrollView>
         <Header />
         <MenuButtons menuPick={setMenu} activeMenu={menu} />
-        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-          {cats ? (
-            cats.map((cat) => (
-                (menu === 'All cats' || cat.liked) && (
+          {s.cats ? (
+            <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+            {cats.length > 0 ? cats.map((cat) => (
                   <CatCard
                     key={cat.id}
                     cat={cat}
                     navigation={navigation}
-                    returnable={menu === 'All cats' || cat.liked}
                   />
-            ))
-          )) : (
-            <Text>Loading</Text>
+            )) : <Monster />}
+            </View>
+          ) : (
+            <BodyText>Loading</BodyText>
           )}
-        </View>
+        
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -54,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
-    paddingHorizontal: 5,
     paddingVertical: 15,
+    paddingHorizontal: 10,
   },
 });

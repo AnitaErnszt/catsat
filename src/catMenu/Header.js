@@ -1,33 +1,21 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import { BodyText } from '../globalStyles';
 
 export default function Header() {
   return (
-    <View style={{alignItems: 'center'}}>
-      <Text style={styles.headerText}>Catsat</Text>
-      <Text style={styles.subHeaderText}>
+    <View style={{alignItems: 'center', marginTop: 10}}>
+      <BodyText isBold isSize={32} style={styles.headerText}>Catsat</BodyText>
+      <BodyText isCentered isSize={20} style={{width: '55%'}}>
         Look after cute cats for stranges for free
-      </Text>
+      </BodyText>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   headerText: {
-    color: '#143154',
-    fontSize: 32,
-    lineHeight: 41,
-    fontFamily: 'Avenir Next',
     letterSpacing: -0.03,
-    fontWeight: '700',
     marginBottom: 7,
-  },
-  subHeaderText: {
-    fontFamily: 'Avenir Next',
-    fontSize: 20,
-    lineHeight: 24,
-    color: '#143154',
-    width: '55%',
-    textAlign: 'center',
   },
 });

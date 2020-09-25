@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {likeCat} from '../state/actions';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faHeart as emptyHeart} from '@fortawesome/free-regular-svg-icons';
 import {faHeart as fullHeart} from '@fortawesome/free-solid-svg-icons';
+import { BodyText } from '../globalStyles';
 
 export default function CatCard({cat, navigation}) {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export default function CatCard({cat, navigation}) {
   };
 
   return (
+    <View style={{width: '50%', padding: 10}}>
     <TouchableOpacity
       onPress={() => navigation.navigate('Details', {cat: cat})}
       style={[styles.cardStyle, {backgroundColor: cat.background_color}]}>
@@ -38,21 +40,21 @@ export default function CatCard({cat, navigation}) {
       />
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={styles.textBox}>
-          <Text style={styles.catName}>{cat.name}</Text>
-          <Text style={styles.catOwner}>Owned by</Text>
-          <Text style={styles.catOwner}>{cat.owner.name}</Text>
+          <BodyText isBold style={{marginBottom: 5}}>{cat.name}</BodyText>
+          <BodyText isSize={12}>Owned by</BodyText>
+          <BodyText isSize={12}>{cat.owner.name}</BodyText>
         </View>
         <LikeButton />
       </View>
     </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   cardStyle: {
-    width: '44%',
-    margin: 10,
-    borderRadius: 20,
+    width: '100%',
+    borderRadius: 20,   
   },
   image: {
     width: '100%',
@@ -63,19 +65,6 @@ const styles = StyleSheet.create({
   textBox: {
     paddingVertical: 20,
     paddingHorizontal: 16,
-  },
-  catName: {
-    fontFamily: 'Avenir Next',
-    fontSize: 16,
-    fontWeight: '700',
-    lineHeight: 19,
-    color: '#143154',
-    marginBottom: 5,
-  },
-  catOwner: {
-    fontFamily: 'Avenir Next',
-    fontSize: 12,
-    lineHeight: 14,
   },
   likeButton: {
     justifyContent: 'center',

@@ -9,8 +9,6 @@ export function HomeScreen({navigation}) {
 
 export function DetailsScreen({navigation, route}) {
   return (
-    <View>
-      <CatDisplay cat={route.params.cat} />
-    </View>
+    <CatDisplay cat={route.params.cat} navigation={navigation} />
   );
 }

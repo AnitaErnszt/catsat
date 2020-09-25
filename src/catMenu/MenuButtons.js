@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {BodyText} from "../globalStyles";
 
 const AppButton = ({onPress, buttonName, activeMenu}) => (
   <TouchableOpacity
@@ -8,15 +9,9 @@ const AppButton = ({onPress, buttonName, activeMenu}) => (
       styles.button,
       {backgroundColor: `${activeMenu === buttonName ? '#143154' : '#E8EAEE'}`},
     ]}>
-    <Text
-      style={[
-        styles.buttonText,
-        {
-          color: `${activeMenu === buttonName ? 'white' : '#143154'}`,
-        },
-      ]}>
+    <BodyText isSize={14} isBold isColour={`${activeMenu === buttonName ? 'white' : '#143154'}`}>
       {buttonName}
-    </Text>
+    </BodyText>
   </TouchableOpacity>
 );
 
@@ -48,11 +43,5 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 45,
     marginRight: 17,
-  },
-  buttonText: {
-    fontWeight: '700',
-    fontSize: 14,
-    lineHeight: 17,
-    fontFamily: 'Avenir Next',
   },
 });

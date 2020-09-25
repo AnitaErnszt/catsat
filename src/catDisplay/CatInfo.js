@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {likeCat} from '../state/actions';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faHeart as emptyHeart} from '@fortawesome/free-regular-svg-icons';
 import {faHeart as fullHeart} from '@fortawesome/free-solid-svg-icons';
+import {BodyText} from "../globalStyles";
 
 export default function CatInfo({cat}) {
   const dispatch = useDispatch();
@@ -24,18 +25,16 @@ export default function CatInfo({cat}) {
           {backgroundColor: `${liked ? '#F46D5C' : 'white'}`},
         ]}
         onPress={() => setLiked(!liked)}>
-        <Text
-          style={[
-            styles.buttonText,
-            {color: `${liked ? 'white' : '#F46D5C'}`},
-          ]}>
+        <BodyText
+          isBold
+          isColour={`${liked ? 'white' : '#F46D5C'}`}>
           <FontAwesomeIcon
             icon={liked ? fullHeart : emptyHeart}
             color={liked ? 'white' : '#F46D5C'}
             size={18}
           />{' '}
           {liked ? 'Liked' : 'Like'}
-        </Text>
+        </BodyText>
       </TouchableOpacity>
     );
   };
@@ -44,33 +43,19 @@ export default function CatInfo({cat}) {
     <View>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View>
-          <Text style={styles.catName}>{cat.name}</Text>
-          <Text style={styles.textStyle}>{cat.age} years old</Text>
+          <BodyText isBold isSize={28} style={{marginBottom: 5}}>{cat.name}</BodyText>
+          <BodyText>{cat.age} years old</BodyText>
         </View>
         <LikeButton />
       </View>
-      <Text style={[styles.textStyle, styles.catDescription]}>
+      <BodyText style={styles.catDescription}>
         {cat.description}
-      </Text>
+      </BodyText>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  catName: {
-    fontFamily: 'Avenir Next',
-    fontSize: 28,
-    fontWeight: '700',
-    lineHeight: 24,
-    color: '#143154',
-    marginBottom: 5,
-    paddingTop: 20,
-  },
-  textStyle: {
-    fontFamily: 'Avenir Next',
-    fontSize: 16,
-    lineHeight: 19,
-  },
   catDescription: {
     marginTop: 21,
     marginBottom: 43,
@@ -84,12 +69,5 @@ const styles = StyleSheet.create({
     marginRight: 10,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  buttonText: {
-    fontFamily: 'Avenir Next',
-    fontSize: 16,
-    lineHeight: 19,
-    fontWeight: '700',
-    paddingLeft: 4,
   },
 });
